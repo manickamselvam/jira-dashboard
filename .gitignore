@@ -1,0 +1,54 @@
+# Node.js and Express (Backend)
+/server/node_modules/
+/server/npm-debug.log
+/server/yarn-error.log
+/server/yarn.lock
+/server/package-lock.json
+/server/.env
+/server/.env.local
+/server/.env.development
+/server/.env.test
+/server/.env.production
+/server/logs/
+/server/*.log
+/server/*.log.*
+/server/dist/
+/server/build/
+/server/coverage/
+/server/*.test.js
+/server/*.spec.js
+
+# React + Vite (Frontend)
+/client/node_modules/
+/client/.vite/
+/client/dist/
+/client/build/
+/client/vite.config.js.timestamp-*
+/client/npm-debug.log
+/client/yarn-error.log
+/client/yarn.lock
+/client/package-lock.json
+/client/.env
+/client/.env.local
+/client/.env.development
+/client/.env.test
+/client/.env.production
+
+# Editor and OS files
+.DS_Store
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Miscellaneous
+/temp/
+/tmp/
+/*.bak
+/*.gho
+/*.ori
+/*.orig
+/*.tmp
