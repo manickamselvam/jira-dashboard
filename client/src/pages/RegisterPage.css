@@ -1,0 +1,45 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f5f7;
+  width: 100vw;
+}
+
+.register-card {
+  width: 400px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.login-link .ant-btn-link {
+  padding: 0;
+  font-weight: 500;
+  color: #1890ff;
+}
+
+.form-item {
+  margin-bottom: 15px;
+}
+
+.error-text {
+  color: #ff4d4f; /* Ant Design's default error red */
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.error-text.warning {
+  color: #faad14; /* Yellow for warnings */
+}
+
+.error-text.success {
+  color: #52c41a; /* Green for success-like feedback */
+}
