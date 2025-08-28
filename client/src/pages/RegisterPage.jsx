@@ -41,13 +41,10 @@ export default function RegisterPage() {
     console.log('form submitted value :', values);
     const { confirmPassword, ...payload } = values;
     const res = await registerUser(payload);
-    console.log('Reg Res :', res);
     if (res.status === 201 || res.message === 'User registered successfully') {
       notifySuccess('Registered!', 'You can now log in.');
-      console.log('Before dispatch :', { user: res.user, token: res.user.id });
-      dispatch(registerSuccess({ user: res.user, token: res.user.id }));
-
-      navigate('/dashboard');
+      dispatch(registerSuccess({ user: res.user }));
+      navigate('/dashboard', { replace: true });
     } else {
       notifyError('Oops...', 'Something went wrong!');
     }
