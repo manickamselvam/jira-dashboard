@@ -6,11 +6,10 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true, // if using cookies or sessions
-  timeout: 10000, // optional: request timeout
+  withCredentials: true,
+  timeout: 10000,
 });
 
-// ✅ Optional: Add interceptors
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {

@@ -9,3 +9,17 @@ export const registerUser = async (payload) => {
     return 'failed';
   }
 };
+
+export const checkAuth = async () => {
+  try {
+    console.log('checkauth called');
+    const res = await axiosInstance.get('auth/check-auth', {
+      withCredentials: true,
+    });
+    console.log('auth res :', res);
+    return res.data.user;
+  } catch (err) {
+    console.log('Error checkAuth:', err);
+    return null;
+  }
+};
