@@ -30,16 +30,17 @@ exports.register = async (req, res, next) => {
   }
 };
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user || !(await bcrypt.compare(password, user.password)))
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
+    }
 
     const token = generateToken(user);
-    setAuthCookie(res, token);
-
+    setAuthCookie(res, token); // sets httpOnly cookie
     res.status(200).json({
       message: 'Login successful',
       user: {
