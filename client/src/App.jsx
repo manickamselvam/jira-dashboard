@@ -18,13 +18,18 @@ export default function App() {
   useEffect(() => {
     const verifyUser = async () => {
       const user = await checkAuth();
-      console.log('User ::', user);
-      dispatch(setUser({ user: user }));
+      let isloggedin;
+      if (user) {
+        isloggedin = true;
+      } else {
+        isloggedin = false;
+      }
+      dispatch(setUser({ user, isloggedin }));
     };
     verifyUser();
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  // if (loading) return <div>Loading...</div>;
 
   return (
     <BrowserRouter>
@@ -40,7 +45,7 @@ export default function App() {
           }
         />
         <Route path="/userdashboard" element={<UserDashboard />} />
-        <Route path="/board" element={<BoardPage />} />
+        <Route path="/board/:projectId" element={<BoardPage />} />
         <Route path="/task/:taskId" element={<TaskDetailPage />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

@@ -3,7 +3,7 @@ import { Pie } from '@ant-design/charts';
 export default function TaskChart({ stats }) {
   const data = [
     { type: 'Completed', value: stats.completed },
-    { type: 'Pending', value: stats.pending },
+    { type: 'Todo', value: stats.pending },
     { type: 'In Progress', value: stats.inProgress },
     { type: 'In QA', value: stats.inQA },
   ];

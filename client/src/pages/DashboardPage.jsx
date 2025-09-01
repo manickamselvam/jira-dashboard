@@ -1,29 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Row, Col, Card } from 'antd';
+import { useState } from 'react';
+import { Row, Col, Card, Spin } from 'antd';
 import NavBar from '../components/layouts/NavBar';
 import ProjectSelector from '../components/dashboard/ProjectSelector';
 import TaskChart from '../components/dashboard/TaskChart';
+import useProjectDashboard from '../hooks/useProjectDashboard'; // ✅ Import your hook
 import './DashboardPage.css';
 
-const dummyProjects = [
-  { id: 1, name: 'Taskero Web' },
-  { id: 2, name: 'Taskero Mobile' },
-  { id: 3, name: 'Taskero API' },
-];
-
-const dummyStats = {
-  1: { total: 50, completed: 20, pending: 10, inProgress: 15, inQA: 5 },
-  2: { total: 30, completed: 10, pending: 5, inProgress: 10, inQA: 5 },
-  3: { total: 40, completed: 25, pending: 5, inProgress: 5, inQA: 5 },
-};
-
 export default function DashboardPage() {
-  const [selectedProjectId, setSelectedProjectId] = useState(1);
-  const [stats, setStats] = useState(dummyStats[selectedProjectId]);
+  const [selectedProjectId, setSelectedProjectId] = useState('');
+  const { projects, metrics } = useProjectDashboard(selectedProjectId); // ✅ Use hook
 
-  useEffect(() => {
-    setStats(dummyStats[selectedProjectId]);
-  }, [selectedProjectId]);
+  const isLoading = projects.length === 0;
 
   return (
     <>
@@ -36,28 +23,37 @@ export default function DashboardPage() {
           width: '100vw',
         }}
       >
-        <ProjectSelector
-          projects={dummyProjects}
-          selectedId={selectedProjectId}
-          onChange={setSelectedProjectId}
-        />
+        {isLoading ? (
+          <Spin tip="Loading dashboard..." />
+        ) : (
+          <>
+            <ProjectSelector
+              projects={projects}
+              selectedId={selectedProjectId}
+              onChange={setSelectedProjectId}
+            />
 
-        <Row gutter={16} style={{ marginTop: 24 }}>
-          <Col span={6}>
-            <Card title="Total Tasks">{stats.total}</Card>
-          </Col>
-          <Col span={6}>
-            <Card title="Completed">{stats.completed}</Card>
-          </Col>
-          <Col span={6}>
-            <Card title="In Progress">{stats.inProgress}</Card>
-          </Col>
-          <Col span={6}>
-            <Card title="In QA">{stats.inQA}</Card>
-          </Col>
-        </Row>
+            <Row gutter={16} style={{ marginTop: 24 }}>
+              <Col span={4}>
+                <Card title="Total Tasks">{metrics.total}</Card>
+              </Col>
+              <Col span={4}>
+                <Card title="Completed">{metrics.completed}</Card>
+              </Col>
+              <Col span={4}>
+                <Card title="In Progress">{metrics.inProgress}</Card>
+              </Col>
+              <Col span={4}>
+                <Card title="In QA">{metrics.inQA}</Card>
+              </Col>
+              <Col span={4}>
+                <Card title="Todo">{metrics.pending}</Card>
+              </Col>
+            </Row>
 
-        <TaskChart stats={stats} />
+            <TaskChart stats={metrics} />
+          </>
+        )}
       </div>
     </>
   );

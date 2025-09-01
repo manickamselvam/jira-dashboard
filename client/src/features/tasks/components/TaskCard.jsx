@@ -95,7 +95,7 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
 
             <Space size="small" style={{ marginBottom: '8px' }}>
               <Tag color={priorityColors[task.priority]} size="small">
-                {task.priority.toUpperCase()}
+                {task?.priority?.toUpperCase()}
               </Tag>
             </Space>
 

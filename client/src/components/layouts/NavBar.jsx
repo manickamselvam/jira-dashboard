@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import './NavBar.css';
+import { logout } from '../../services/authService';
+import { useDispatch } from 'react-redux';
+import { logoutSucess } from '../../features/auth/authSlice';
+import { notifySuccess } from '../../utils/notify';
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -10,6 +14,7 @@ const MySwal = withReactContent(Swal);
 
 export default function NavBar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const showLogoutConfirm = () => {
     MySwal.fire({
@@ -20,9 +25,13 @@ export default function NavBar() {
       confirmButtonText: 'Logout',
       cancelButtonText: 'Cancel',
       reverseButtons: true,
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         console.log('Logging out...');
+        const res = await logout();
+        console.log('Logout response :', res);
+        notifySuccess('Success', 'Logged Out Successfully');
+        dispatch(logoutSucess());
         navigate('/login');
       }
     });
