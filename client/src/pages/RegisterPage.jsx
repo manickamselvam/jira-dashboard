@@ -41,7 +41,7 @@ export default function RegisterPage() {
     console.log('form submitted value :', values);
     const { confirmPassword, ...payload } = values;
     const res = await registerUser(payload);
-    if (res.status === 201 || res.message === 'User registered successfully') {
+    if (res.message === 'User registered successfully') {
       notifySuccess('Registered!', 'You can now log in.');
       dispatch(registerSuccess({ user: res.user }));
       navigate('/dashboard', { replace: true });

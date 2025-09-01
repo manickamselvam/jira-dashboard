@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 export default function ProjectSelector({ projects, selectedId, onChange }) {
   const navigate = useNavigate();
   const handleBoardClick = () => {
-    navigate(`/board`);
-    // navigate(`/board/${selectedId}`);
+    // navigate(`/board`);
+    navigate(`/board/${selectedId}`);
   };
   return (
     <Form layout="vertical">
@@ -19,7 +19,7 @@ export default function ProjectSelector({ projects, selectedId, onChange }) {
               placeholder="Choose a project"
             >
               {projects.map((project) => (
-                <Select.Option key={project.id} value={project.id}>
+                <Select.Option key={project._id} value={project._id}>
                   {project.name}
                 </Select.Option>
               ))}
