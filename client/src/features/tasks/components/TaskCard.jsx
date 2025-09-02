@@ -76,7 +76,7 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
                 marginBottom: '8px',
               }}
             >
-              <Link to={`/task/${task.id}`} style={{ color: '#1677ff' }}>
+              <Link to={`/task/${task._id}`} style={{ color: '#1677ff' }}>
                 {task.title}
               </Link>
             </Text>
