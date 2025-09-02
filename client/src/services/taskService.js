@@ -10,3 +10,14 @@ export const getTasksByProject = async (projectId) => {
     return 'failed';
   }
 };
+
+export const getTasksById = async (taskId) => {
+  try {
+    console.log('taskId :', taskId);
+    const res = await axiosInstance.get(`/tasks/${taskId}`, {});
+    return res;
+  } catch (error) {
+    console.log('Error in getTasksById :', error);
+    return 'failed';
+  }
+};
